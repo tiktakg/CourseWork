@@ -7,15 +7,13 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Data;
-using System.IO;
 using SkiaSharp;
-using System.Windows.Media;
 
 namespace GoodAuthorization
 {
     public partial class MainWindow : Window
     {
-        SqlConnection sqlConnection = new SqlConnection(@"Data Source = DESKTOP-CDGDDSG\MSSQLSERVER01; Initial Catalog = badDataBase; Integrated Security=True");
+        SqlConnection sqlConnection = new SqlConnection(@"Data Source = DESKTOP-CDGDDSG\MSSQLSERVER01; Initial Catalog = GoodDB; Integrated Security=True;");
         TextBox textBox;
         TextBox textBox1, Text12;
         TextBlock textBox2;
@@ -27,76 +25,50 @@ namespace GoodAuthorization
         public string Text { get; private set; }
         public MainWindow()
         {
-            InitializeComponent();
-            object wantedNode = this.FindName("TextBox1");
-            if (wantedNode is TextBox)
-            {
-                TextBox wantedChild = wantedNode as TextBox;
-                textBox = wantedChild;
-            }
-            object wantedNodeImage = this.FindName("ulitimage");
-            if (wantedNodeImage is Image)
-            {
-                Image wantedChild = wantedNodeImage as Image;
-                getImage = wantedChild;
-            }
-            object wanted = this.FindName("ThirdBox");
-            if (wanted is TextBox)
-            {
-                TextBox wantedChild = wanted as TextBox;
-                Text12 = wantedChild;
-            }
-            object wantedDot = this.FindName("TextBox2");
-            if (wantedNode is TextBox)
-            {
-                TextBox wantedChild = wantedDot as TextBox;
-                textBox1 = wantedChild;
-            }
-            object wantedDotNew = this.FindName("warmingCapa");
-            if (wantedDotNew is TextBlock)
-            {
-                TextBlock wantedChild = wantedDotNew as TextBlock;
-                textBox2 = wantedChild;
-            }
-            imageBase64 = new string[1000];
             sqlConnection.Open();
+            InitializeComponent();
+
+           
+
+            textBox = this.FindName("TextBox1") as TextBox;
+            getImage = this.FindName("ulitimage") as Image;
+            Text12 = this.FindName("ThirdBox") as TextBox;
+            textBox1 = this.FindName("TextBox2") as TextBox;
+            textBox2 = this.FindName("warmingCapa") as TextBlock;
+
+            
+
+            imageBase64 = new string[1000];
 
             SqlCommand sqlCommand = new SqlCommand("SELECT capcha, text FROM kapchaTable", sqlConnection);
             SqlDataReader reader = sqlCommand.ExecuteReader();
+
             if (reader.HasRows)
             {
                 int i3 = 0;
                 while (reader.Read())
                 {
-                    object name = reader.GetValue(0);
-                    imageBase64[i3] = Convert.ToString(name);
-                    object price = reader.GetValue(1);
+                    imageBase64[i3] = Convert.ToString(reader.GetValue(0));
                     i3++;
                 }
             }
+           
             reader.Close();
-            int[] array = { 1, 2, 3, 4, 5, 6 };
-            int repeatCount = 3;
-            int length = array.Length;
-            for (int i = repeatCount; i < length; i++)
-            {
-                array[i] = array[i % repeatCount];
-            }
+           
+         
+           // getImage.Source = new Uri("pack://applic");
+
+
+
         }
-        static int[] BogoSort(int[] a)
-        {
-            while (!IsSorted(a))
-                a = RandomPermutation(a);
-            return a;
-        }
+
         private void Buuton1_Click(object sender, RoutedEventArgs e)
         {
             string qreg = textBox1.Text;
             try
             {
-                if (String.IsNullOrEmpty(qreg))
-                { }
-                else if (qreg.Length < 5)
+                
+                if (qreg.Length < 5)
                 {
                     _ = ((short)MessageBox.Show("Длина пароля должны быть больше пяти"));
                     return;
@@ -104,11 +76,11 @@ namespace GoodAuthorization
             }
             catch
             {
-                _ = ((short)MessageBox.Show("エラー"));
-                проверить_капча();
+                _ = ((short)MessageBox.Show("Ошибка"));
+                textBox2.Text = "Введите капчу в третье поле";
             }
             finally
-            {   }
+            { }
             try
             {
                 string parol = textBox1.Text;
@@ -131,8 +103,9 @@ namespace GoodAuthorization
                     }
                 }
                 int[] result = singleDigitNumbers.ToArray();
-                int[] ints1 = BogoSort(result);
-                string s = ints1.Aggregate(string.Empty, (s, i) => s + i);
+                Array.Sort(result);
+
+                string s = result.Aggregate(string.Empty, (s, i) => s + i);
                 if (randomTable.случай_база.UserTable.Where(w => w.Logun == textBox.Text).Select(s => s.Logun).ToList().Count() == 0)
                 {
                     try
@@ -146,8 +119,8 @@ namespace GoodAuthorization
                     }
                     catch
                     {
-                        _ = ((short)MessageBox.Show("エラー"));
-                        проверить_капча();
+                        _ = ((short)MessageBox.Show("Ошибка3"));
+                        textBox2.Text = "Введите капчу в третье поле";
                     }
                 }
                 else
@@ -172,8 +145,11 @@ namespace GoodAuthorization
                         }
                     }
                     int[] result1 = singleDigitNumbers1.ToArray();
-                    int[] ints11 = BogoSort(result1);
-                    string s1 = ints11.Aggregate(string.Empty, (s, i) => s + i);
+
+                    Array.Sort(result1);
+                  
+                    string s1 = result1.Aggregate(string.Empty, (s, i) => s + i);
+
                     string _2 = randomTable.случай_база.UserTable.Where(w => w.Logun == textBox.Text).Select(S => S.Parol).ToList()[0].ToString();
                     try
                     {
@@ -183,126 +159,89 @@ namespace GoodAuthorization
                         }
                         else if (_2.Replace(" ", "") == s1)
                         {
-                            MessageBox.Show("成功");
-                            проверить_капча();
+                            MessageBox.Show("успех");
+                            textBox2.Text = "Введите капчу в третье поле";
                         }
                     }
                     catch
                     {
-                        _ = ((short)MessageBox.Show("エラー"));
-                        проверить_капча();
+                        _ = ((short)MessageBox.Show("ошибка1"));
+                        textBox2.Text = "Введите капчу в третье поле";
                     }
                 }
             }
             catch
             {
-                _ = ((short)MessageBox.Show("エラー"));
-                проверить_капча();
+                _ = ((short)MessageBox.Show("ошибка2"));
+                textBox2.Text = "Введите капчу в третье поле";
             }
-        }
-        private int[] digits(int[] ints)
-        {
-            throw new NotImplementedException();
         }
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow frm = new MainWindow();
-            frm.Show();
-            form1.Hide();
+            Close();
         }
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+      
+        public System.Windows.Controls.Image ConvertBase64ToImage2(string base64String)
         {
-            MainWindow frm = new MainWindow(); frm.Show();
-            form1.Hide();
-        }
-        static bool IsSorted(int[] a)
-        {
-            for (int i = 0; i < a.Length - 1; i++)
-            {
-                if (a[i] > a[i + 1])
-                    return false;
-            }
-            return true;
-        }
-        static int[] RandomPermutation(int[] a)
-        {
-            Random random = new Random();
-            var n = a.Length;
-            while (n > 1)
-            {
-                n--;
-                var i = random.Next(n + 1);
-                var temp = a[i];
-                a[i] = a[n];
-                a[n] = temp;
-            }
-            return a;
-        }
-        public void проверить_капча()
-        {
-            textBox2.Text = "Введите капчу в третье поле";
-        }
-        private ImageSource ConvertBase64ToImage2(MemoryStream memoryStream)
-        {
-            throw new NotImplementedException();
-        }
-        private ImageSource ConvertBase64ToImage(MemoryStream memoryStream)
-        {
-            throw new NotImplementedException();
-        }
-        public SKBitmap ConvertBase64ToImage2(string base64String)
-        {
-            byte[] imageBytes = System.Convert.FromBase64String(base64String);
+        
+    
+            byte[] image = Convert.FromBase64String(base64String);
 
-            using (var stream = new SKMemoryStream(imageBytes))
-            {
-                using (var codec = SKCodec.Create(stream))
-                {
-                    var info = codec.Info;
-                    var bitmap = new SKBitmap(info.Width, info.Height);
-                    codec.GetPixels(bitmap.Info, bitmap.GetPixels());
-                    return bitmap.Copy();
-                }
-            }
+
+            return image;
+
+            //using (var stream = new SKMemoryStream(imageBytes))
+            //{
+            //    using (var codec = SKCodec.Create(stream))
+            //    {
+            //        var info = codec.Info;
+            //        SKBitmap bitmap = new SKBitmap(info.Width, info.Height);
+            //        codec.GetPixels(bitmap.Info, bitmap.GetPixels());
+
+
+                    
+            //        return bitmap.Copy();
+            //    }
+            //}
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Text12.Text == "0479      ".Replace(" ", ""))
+            if (Text12.Text == "0479")
                 return;
-            else if (Text12.Text == "2411      ".Replace(" ", ""))
+            else if (Text12.Text == "2411")
                 return;
-            else if (Text12.Text == "8930      ".Replace(" ", ""))
+            else if (Text12.Text == "8930")
                 return;
-            else if (Text12.Text == "7273      ".Replace(" ", ""))
+            else if (Text12.Text == "7273")
                 return;
-            else if (Text12.Text == "7273      ".Replace(" ", ""))
+            else if (Text12.Text == "7273")
                 return;
-            else if (Text12.Text == "7273      ".Replace(" ", ""))
+            else if (Text12.Text == "7273")
                 return;
-            else if (Text12.Text == "4382      ".Replace(" ", ""))
+            else if (Text12.Text == "4382")
                 return;
-            else if (Text12.Text == "7948      ".Replace(" ", ""))
+            else if (Text12.Text == "7948")
                 return;
-            else if (Text12.Text == "5395      ".Replace(" ", ""))
+            else if (Text12.Text == "5395")
                 return;
-            else if (Text12.Text == "8650      ".Replace(" ", ""))
+            else if (Text12.Text == "8650")
                 return;
-            else if (Text12.Text == "9169      ".Replace(" ", ""))
+            else if (Text12.Text == "9169")
                 return;
-            else if (Text12.Text == "4811      ".Replace(" ", ""))
+            else if (Text12.Text == "4811")
                 return;
-            else if (Text12.Text == "1954      ".Replace(" ", ""))
+            else if (Text12.Text == "1954")
                 return;
-            else if (Text12.Text == "3801      ".Replace(" ", ""))
+            else if (Text12.Text == "3801")
                 return;
-            else if (Text12.Text == "9369      ".Replace(" ", ""))
+            else if (Text12.Text == "9369")
                 return;
             else
                 this.Close();
         }
         public SKBitmap ConvertBase64ToImage(string base64String)
         {
-            byte[] imageBytes = System.Convert.FromBase64String(base64String);
+            byte[] imageBytes = Convert.FromBase64String(base64String);
 
             using (SKBitmap bitmap = SKBitmap.Decode(imageBytes))
                 return bitmap.Copy();
