@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="new.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <COMReference Include="{d37e2a3e-8545-3a39-9f4f-31827c9124ab}">
       <WrapperTool>tlbimp</WrapperTool>
       <VersionMinor>4</VersionMinor>
@@ -38,10 +34,6 @@
     <PackageReference Include="SixLabors.ImageSharp" Version="3.0.0" />
     <PackageReference Include="SkiaSharp" Version="2.88.6" />
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="new.jpg" />
   </ItemGroup>
 
 </Project>

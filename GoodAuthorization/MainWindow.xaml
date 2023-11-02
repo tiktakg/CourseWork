@@ -17,31 +17,26 @@
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
 
+        <Menu Grid.Row="0" Height="30" VerticalAlignment="Top">
+            <MenuItem Header="Выйти" Click="MenuItem_Click" />
+        </Menu>
+        
         <TextBlock x:Name="warmingCapa" Margin="400 0 0 0"></TextBlock>
 
         <StackPanel Grid.Row="1" VerticalAlignment="Top" Orientation="Vertical" Panel.ZIndex="1" Margin="-10,0,10,0">
 
-            <TextBox Panel.ZIndex="1" x:Name="TextBox1" Width="400" Height="40" />
-            <Button Content="Войти" Panel.ZIndex="1" x:Name="Buuton1" Click="Buuton1_Click" Margin="340 100 100 10"
-                    Height="37" Width="114" RenderTransformOrigin="-0.052,0.603">
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform />
-                        <SkewTransform />
-                        <RotateTransform Angle="360.061" />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Button.RenderTransform>
+            <TextBox Panel.ZIndex="1" x:Name="fildForInputLogin" Width="400" Height="40" />
+            <Button Content="Войти" Panel.ZIndex="0" x:Name="Buuton1" Click="Buuton1_Click" Margin="340 100 100 10"
+                    Height="35" Width="100" RenderTransformOrigin="-0.052,0.603">
+
             </Button>
         </StackPanel>
 
-        <Menu Grid.Row="0" Height="30" VerticalAlignment="Top">
-            <MenuItem Header="Выйти" Click="MenuItem_Click" />
-        </Menu>
+        
 
-        <Image Name="ulitimage" Width="100" Height="100" Visibility="Visible" Grid.Row="2" Margin="342,15,358,-105" />
-        <TextBox Panel.ZIndex="2" Name="TextBox2" Height="40" Margin="200,80,200,80" Grid.Row="1" />
-        <TextBox Panel.ZIndex="0" Name="ThirdBox" Height="40" Margin="10,157,10,-187" Grid.Row="2" />
+        <Image Name="imageForCaptah" Width="100" Height="100" Visibility="Visible" Grid.Row="2" Margin="342,15,358,-105" />
+        <TextBox Panel.ZIndex="2" Name="fildForInputPassword" Height="40" Margin="200,80,200,80" Grid.Row="1" />
+        <TextBox Panel.ZIndex="0"  Name="fildForInputCaptha" Height="40" Margin="6,130,14,-160" Grid.Row="2" />
         <Button Content="Проверить капчу" Margin="582,141,0,0" VerticalAlignment="Top" Click="Button_Click" Grid.Row="1" />
     </Grid>
 

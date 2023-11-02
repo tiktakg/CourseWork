@@ -6361,11 +6361,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gupli\\OneDrive\\Рабочий стол\\GoodAuthorization\\GoodAuthorization\\GoodAuthorization.csproj",
+      "projectUniqueName": "C:\\Users\\gupli\\Source\\Repos\\tiktakg\\CourseWork\\GoodAuthorization\\GoodAuthorization.csproj",
       "projectName": "GoodAuthorization",
-      "projectPath": "C:\\Users\\gupli\\OneDrive\\Рабочий стол\\GoodAuthorization\\GoodAuthorization\\GoodAuthorization.csproj",
+      "projectPath": "C:\\Users\\gupli\\Source\\Repos\\tiktakg\\CourseWork\\GoodAuthorization\\GoodAuthorization.csproj",
       "packagesPath": "C:\\Users\\gupli\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gupli\\OneDrive\\Рабочий стол\\GoodAuthorization\\GoodAuthorization\\obj\\",
+      "outputPath": "C:\\Users\\gupli\\Source\\Repos\\tiktakg\\CourseWork\\GoodAuthorization\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

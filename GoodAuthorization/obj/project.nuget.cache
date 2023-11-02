@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bTv7Uo7wig8pnbYrHGbZ5/s6a23clhe1vcU87u1RhitPLHVVaJlDggLQrzh9+dDqJWQgoSFzDf3phejs6yW/TQ==",
+  "dgSpecHash": "FoC/uQANofTUEFDEIxrzVv+An7dyR9vgn+1ihigskmWjHeMLTFVJ7QDGif9IAP2WJf1RxG1HTjKrS2OqazrqAw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gupli\\OneDrive\\Рабочий стол\\GoodAuthorization\\GoodAuthorization\\GoodAuthorization.csproj",
+  "projectFilePath": "C:\\Users\\gupli\\Source\\Repos\\tiktakg\\CourseWork\\GoodAuthorization\\GoodAuthorization.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gupli\\.nuget\\packages\\entityframework\\4.1.10331\\entityframework.4.1.10331.nupkg.sha512",
     "C:\\Users\\gupli\\.nuget\\packages\\microsoft.csharp\\4.6.0\\microsoft.csharp.4.6.0.nupkg.sha512",
